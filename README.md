@@ -14,12 +14,6 @@ This repository contains a Jupyter Notebook demonstrating how to classify SMS me
 - Predicting New SMS Samples
 
 ## Notebook Summary
-
-**NAME :ABHIJITH P V**
-
-**REGISTER NO: 24MSD7041**
-
-
 ```python
 import pandas as pd
 import numpy as np
@@ -34,29 +28,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
-
 ```python
 df = pd.read_csv('SMSSpamCollection.csv')
 df.head()
 ```
 
-
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -97,28 +74,25 @@ df.head()
 
 
 
-Label Encoding for result
+**Label Encoding for result**
 
 
 ```python
 df['result'] = df['result'].map({'ham': 0, 'spam': 1})
 ```
 
-Tokenizing the values
+**Tokenizing the values**
 
 
 ```python
 labels = df['result'].values
 messages = df['message'].values
 ```
-
-
 ```python
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(messages)
 sequences = tokenizer.texts_to_sequences(messages)
 ```
-
 
 ```python
 # Lowercase and simple tokenization
@@ -127,7 +101,7 @@ tokenizer.fit_on_texts(messages)
 sequences = tokenizer.texts_to_sequences(messages)
 ```
 
-Padding to make the inputs of same length
+**Padding to make the inputs of same length**
 
 
 ```python
@@ -135,7 +109,7 @@ max_len = 100
 padded_sequences = pad_sequences(sequences, maxlen=max_len, padding='post', truncating='post')
 ```
 
-Splitting into training and testing data
+**Splitting into training and testing data**
 
 
 ```python
@@ -143,7 +117,7 @@ X_train, X_test, y_train, y_test = train_test_split(padded_sequences, labels, te
 
 ```
 
-Model Compiling with Three Layers
+**Model Compiling with Three Layers**
 
 
 ```python
@@ -162,7 +136,7 @@ model_baseline.compile(optimizer='adam', loss='binary_crossentropy', metrics=['a
       warnings.warn(
 
 
-Model Training upto 5 epochs
+**Model Training upto 5 epochs**
 
 
 ```python
@@ -190,7 +164,7 @@ history_baseline = model_baseline.fit(
     [1m140/140[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 28ms/step - accuracy: 0.8686 - loss: 0.3909 - val_accuracy: 0.8556 - val_loss: 0.4154
 
 
-Baseline Model Evaluation
+**Baseline Model Evaluation**
 
 
 ```python
@@ -224,7 +198,7 @@ plt.show()
     
 
 
-Adding Dropout to the baseline model
+**Adding Dropout to the baseline model**
 
 
 ```python
@@ -267,7 +241,7 @@ history_experiment = model_experiment.fit(
     [1m140/140[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 30ms/step - accuracy: 0.8686 - loss: 0.3937 - val_accuracy: 0.8556 - val_loss: 0.4130
 
 
-Comapritive Evaluation of the Experimental and Baseline Model
+**Comapritive Evaluation of the Experimental and Baseline Model**
 
 
 ```python
@@ -292,7 +266,7 @@ print(f"Mini-Experiment Model Test Accuracy: {accuracy_experiment:.4f}")
     Mini-Experiment Model Test Accuracy: 0.8556
 
 
-Add On (Setting LSTM to 64 -> 128)
+**Add On (Setting LSTM to 64 -> 128) which is optional**
 
 
 ```python
@@ -321,7 +295,7 @@ history_experiment = model_experiment1.fit( X_train, y_train, epochs=5, batch_si
     [1m140/140[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m6s[0m 46ms/step - accuracy: 0.8686 - loss: 0.3899 - val_accuracy: 0.8556 - val_loss: 0.4139
 
 
-Evaluation of Add-On
+**Evaluation of Add-On**
 
 
 ```python
