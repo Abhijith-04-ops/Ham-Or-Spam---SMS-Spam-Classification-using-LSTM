@@ -192,12 +192,6 @@ plt.show()
 
 ```
 
-
-    
-![png](output_20_0.png)
-    
-
-
 **Adding Dropout to the baseline model**
 
 
